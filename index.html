@@ -241,7 +241,7 @@
             <div class="row">
 
                 <!-- Single Service Area -->
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4" onclick="togglePopUp()">
                     <div class="single-service-area mb-80">
                         <!-- Service Icon -->
                         <div class="service-icon">
@@ -249,12 +249,12 @@
                         </div>
                         <h5>Voice Conversion</h5>
                         <p>Convert the given voice into the person that you want.</p>
-                        <a href="./contact.html" class="btn uza-btn btn-2 mt-4">View Demo</a>
+                        <button class="btn uza-btn btn-2 mt-4 demo-buttons">View Demo</button>
                     </div>
                 </div>
 
                 <!-- Single Service Area -->
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4" onclick="togglePopUp()">
                     <div class="single-service-area mb-80">
                         <!-- Service Icon -->
                         <div class="service-icon">
@@ -262,12 +262,12 @@
                         </div>
                         <h5>Text-to-Speech</h5>
                         <p>Customize Text-to-Speech (TTS) and Speech-to-Text for relevant tasks.</p>
-                        <a href="./contact.html" class="btn uza-btn btn-2 mt-4">View Demo</a>
+                        <button class="btn uza-btn btn-2 mt-4 demo-buttons">View Demo</button>
                     </div>
                 </div>
 
                 <!-- Single Service Area -->
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4" onclick="togglePopUp()">
                     <div class="single-service-area mb-80">
                         <!-- Service Icon -->
                         <div class="service-icon">
@@ -275,7 +275,7 @@
                         </div>
                         <h5>NLP Services</h5>
                         <p>Customize Sentiment Analysis, Text Summarization, and Content Developer.</p>
-                        <a href="./contact.html" class="btn uza-btn btn-2 mt-4">View Demo</a>
+                        <button class="btn uza-btn btn-2 mt-4 demo-buttons">View Demo</button>
                     </div>
                 </div>
 
@@ -294,9 +294,6 @@
         </div>
 
         <!-- Background Curve -->
-        <div class="portfolio-bg-curve">
-            <img src="./img/core-img/curve-3.png" alt="">
-        </div>
     </section>
     <!-- ***** Portfolio Area End ***** -->
 
@@ -367,8 +364,68 @@
     <!-- ***** Blog Area End ***** -->
 
 
+    <!-- ***** Contact form pop-up starts ***** -->
+    <div class="contact-form-container" id="contact-form" >
+        <div class="contact-form-outer-overlay" onclick="togglePopUp()"></div>
+        <div class="contact-form-content" onclick="">
+            <div class="form-heading mb-30">
+                <h4>Want to see a demo of our work?<br>Fill out this details, we'll reach you out soon</h4>
+            </div>
+            <form class="form-container" action="#" method="post" id="contactForm">
+                <div class="form-group">
+                    <input type="text" class="form-control mb-30" name="full-name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control mb-30" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control mb-30" name="contact-number" placeholder="Phone">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control mb-30" name="company-name" placeholder="Company">
+                </div>
+                <div class="form-cta-conatiner">
+                    <button class="btn uza-btn btn-3 mt-15" id="form-cta-button">Request a demo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- ***** Contact form pop-up ends ***** -->
+
+
 
     <!-- ******* All JS Files ******* -->
+    <script>
+    function togglePopUp() {
+        var x = document.getElementById("contact-form") || none;
+        if (x.style.display === "flex") {
+            x.style.display = "none";
+            $('body').removeClass('stop-scrolling')
+        } else {
+            x.style.display = "flex";
+            $('body').addClass('stop-scrolling')
+        }
+    }
+    contactForm.onsubmit = (e) => {
+        e.preventDefault();
+        document.getElementById("form-cta-button").value = "Submitting!!";
+        url = 'https://script.google.com/macros/s/AKfycbzR3X1a9_Ix4yxeLutu285FqC4782tV8ATnGNaxKJcL5zeAqOg/exec';
+        const response = $('form').serializeArray();
+        let i, data;
+        for (i = 0; i < response.length; i++) {
+            let x = { [response[i].name]: response[i].value }
+            if (x) { data = { ...data, ...x } }
+        }
+        var jqxhr = $.ajax({
+            url: url,
+            method: "GET",
+            dataType: "json",
+            data: data
+        }).success(
+            togglePopUp()
+        );
+    }
+    </script>
     <!-- jQuery js -->
     <script src="js/jquery.min.js"></script>
     <!-- Popper js -->

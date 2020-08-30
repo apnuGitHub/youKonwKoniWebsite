@@ -145,6 +145,50 @@ ul {
   width: 40px;
   height: 40px;
 }
+.demo-buttons{
+  cursor: pointer;
+}
+.contact-form-container{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.65);
+  z-index: 700;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.contact-form-outer-overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+.contact-form-content{
+  background:#fff;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+    z-index: 750;
+}
+.form-heading{
+text-align: center;
+}
+.form-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.form-cta-conatiner{
+  display: flex;
+  justify-content: center;
+}
 .bg-overlay {
   position: relative;
   z-index: 1; }

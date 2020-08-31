@@ -368,26 +368,39 @@
     <div class="contact-form-container" id="contact-form" >
         <div class="contact-form-outer-overlay" onclick="togglePopUp()"></div>
         <div class="contact-form-content" onclick="">
-            <div class="form-heading mb-30">
-                <h4>Want to see a demo of our work?<br>Fill out these details, we'll reach you out soon</h4>
+            <div id="form-content">
+                <div class="form-heading mb-30">
+                    <h4>Want to see a demo of our work?</h4>
+                </div>
+                <form class="form-container" action="#" method="post" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-30" name="full-name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control mb-30" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-30" name="contact-number" placeholder="Phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-30" name="company-name" placeholder="Company">
+                    </div>
+                    <div class="form-cta-conatiner">
+                        <button class="btn uza-btn btn-3 mt-15" id="form-cta-button">Request a demo</button>
+                    </div>
+                </form>
             </div>
-            <form class="form-container" action="#" method="post" id="contactForm">
-                <div class="form-group">
-                    <input type="text" class="form-control mb-30" name="full-name" placeholder="Name">
+            <div id="form-sucess">
+                <div class="sucess-tick">
+                    <img src="./img/core-img/tick.png" alt="">
                 </div>
-                <div class="form-group">
-                    <input type="email" class="form-control mb-30" name="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control mb-30" name="contact-number" placeholder="Phone">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control mb-30" name="company-name" placeholder="Company">
+                <div class="form-heading mb-30">
+                    <h4>Thanks for submitting the details<br>Someone from our team will reach you out soon</h4>
                 </div>
                 <div class="form-cta-conatiner">
-                    <button class="btn uza-btn btn-3 mt-15" id="form-cta-button">Request a demo</button>
+                    <button class="btn uza-btn btn-3 mt-15" onclick="togglePopUp();handleForm(1)">Okay got it!</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <!-- ***** Contact form pop-up ends ***** -->
@@ -406,9 +419,21 @@
             $('body').addClass('stop-scrolling')
         }
     }
+    //flow 0 is showing sucessElment and hiding formContentElement flow 1 is vice versa
+    function handleForm(flow) {
+        if(flow === 0){
+            document.getElementById("form-content").style.display = 'none';
+            document.getElementById("form-sucess").style.display = 'block';
+        }
+        if(flow === 1){
+            document.getElementById("form-content").style.display = 'block';
+            document.getElementById("form-sucess").style.display = 'none';
+        }
+        return
+    }
     contactForm.onsubmit = (e) => {
         e.preventDefault();
-        document.getElementById("form-cta-button").value = "Submitting!!";
+        handleForm(0);
         url = 'https://script.google.com/macros/s/AKfycbzR3X1a9_Ix4yxeLutu285FqC4782tV8ATnGNaxKJcL5zeAqOg/exec';
         const response = $('form').serializeArray();
         let i, data;
@@ -421,8 +446,8 @@
             method: "GET",
             dataType: "json",
             data: data
-        }).success(
-            togglePopUp()
+        }).success( () => {
+        }
         );
     }
     </script>
